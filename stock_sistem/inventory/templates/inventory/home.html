@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Головна</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            gap: 20px;
+            width: 300px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn {
+            padding: 15px;
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/stock-report" class="btn">📦 Товари</a>
+    <a href="/admin/inventory/stockmovement" class="btn">🔄 Рухи</a>
+    <a href="/analytics/" class="btn">📊 Аналітика</a>
+    <a href="/admin/" class="btn">⚙️ Адмінка</a>
+</div>
+
+</body>
+</html>

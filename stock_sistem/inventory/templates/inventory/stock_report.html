@@ -1,0 +1,59 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+
+<h1>Stock Report</h1>
+
+<form method="get" style="text-align:center; margin-bottom:20px;">
+    
+    <input 
+        type="text" 
+        name="search" 
+        placeholder="Search product..."
+        value="{{ search_query }}"
+        
+    >
+
+    <label>
+        <input 
+            type="checkbox" 
+            name="in_stock" 
+            value="1"
+            style="cursor: pointer;"
+            {% if in_stock == '1' %}checked{% endif %}
+        >
+        Only in stock
+    </label>
+
+    <button type="submit" 
+>Filter</button>
+
+</form>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Purchase Price</th>
+        <th>Selling Price</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td><a class="product_refs" href="{% url 'product_detail' product.product_id %}">{{ product.name }}</a></td>
+        <td>{{ product.balance }}</td>
+        <td>{{ product.purchase_price }}</td>
+        <td>{{ product.selling_price }}</td>
+        <td> 
+            {% if product.is_low %}
+            ⚠ Only {{ product.balance }} left!
+            {% else %}
+            ✅ OK
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<div style="margin-top: 20px; text-align: center; ">
+        <a class="button" href="/" style="padding: 5px 15px; font-weight: bold;">На головну</a>
+    </div>
+
