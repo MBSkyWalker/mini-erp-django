@@ -77,34 +77,24 @@
         }
     </style>
 </head>
-
-<h1>Продажі за {{ today }}</h1>
-
-<h3>Загальна кількість: {{ total_quantity }}</h3>
-<h3>Загальна сума: {{ total_revenue }}</h3>
-<h3>Прибуток: {{ total_profit }}</h3>
-
-
-<table border="1">
-    <tr>
-        <th>Продукт</th>
-        <th>Кількість</th>
-        <th>Ціна</th>
-        <th>Сума</th>
-        <th>Час</th>
-        
-        
-    </tr>
-
-    {% for sale in sales %}
+{% for report in reports %}
+<h1>{{ report.date }}</h1>
+<h1>Прибуток {{ report.total_profit }}</h1>
+<table>
+    {% for sale in report.sales %}
     <tr>
         <td>{{ sale.product.name }}</td>
         <td>{{ sale.quantity }}</td>
         <td>{{ sale.price }}</td>
-        <td>{{ sale.total_value }}</td>
-        <td>{{ sale.created_at|date:"H:i" }}</td>
-        
-        
+        <td>{{ sale.profit }}</td>
+
     </tr>
     {% endfor %}
 </table>
+
+{% endfor %}
+<form method="get">
+    <input type="date" name="start_date">
+    <input type="date" name="end_date">
+    <button type="submit">Показати</button>
+</form>

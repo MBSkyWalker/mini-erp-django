@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.utils import timezone
 class Counterparty(models.Model):
     COUNTERPARTY_TYPES = (
         ('supplier', 'Supplier'),
@@ -64,6 +64,8 @@ class StockMovement(models.Model):
     # актуальна закупочна 
     purchase_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    
     
     
 
@@ -102,18 +104,28 @@ class StockMovement(models.Model):
     
     def save(self, *args, **kwargs):
 
-    # якщо це новий запис
         if not self.pk:
-
             if self.movement_type == 'out':
-                self.price = self.product.selling_price
-                self.purchase_price = self.product.purchase_price
+                if not self.price:
+                    self.price = self.product.selling_price
+
+                if not self.purchase_price:
+                    self.purchase_price = self.product.purchase_price
 
             elif self.movement_type == 'in':
-                self.purchase_price = self.product.purchase_price
+                if not self.purchase_price:
+                    self.purchase_price = self.product.purchase_price
 
         super().save(*args, **kwargs)
+    
+class SalesReport(models.Model):
+    date = models.DateField(default=timezone.now)
+    total_quantity = models.PositiveIntegerField()
+    total_revenue = models.DecimalField(max_digits=12, decimal_places=2)
+    total_profit = models.DecimalField(max_digits=12, decimal_places=2)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.product.name} - {self.quantity} шт. по {self.price} грн = {self.total_value} грн"
+        return f"Звіт за {self.date}"
 
