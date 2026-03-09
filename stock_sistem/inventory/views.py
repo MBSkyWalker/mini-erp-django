@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, StockMovement, SalesReport
 from django.utils import timezone
 from django.db.models import Sum, F
@@ -121,6 +121,15 @@ def period_sales_report(request):
     'reports': reports,
     
 })
+
+def copy_movement(request, pk):
+
+    movement = get_object_or_404(StockMovement, pk=pk)
+
+    movement.pk = None
+    movement.save()
+
+    return redirect("/admin/inventory/stockmovement/")
     
     
    
