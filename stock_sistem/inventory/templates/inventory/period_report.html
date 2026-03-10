@@ -1,7 +1,7 @@
 <head>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: math;
             background-color: #f4f6f9;
             margin: 40px;
         }
@@ -75,9 +75,58 @@
         .back-button:hover {
             background-color: #1a242f;
         }
+    .filter-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;      /* проміжки між полями */
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+}
+
+.filter-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #333;
+}
+
+.filter-input {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.filter-button {
+    padding: 6px 15px;
+    font-size: 14px;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.filter-button:hover {
+    background-color: #357ABD;
+}
+.control{
+    width: 100%;
+    height: 2px;
+    background-color: salmon;
+    margin-top: 50px;
+}
     </style>
 </head>
 {% for report in reports %}
+<div class="control"></div>
 <h1>{{ report.date }}</h1>
 <h1>Прибуток {{ report.total_profit }}</h1>
 <table>
@@ -93,8 +142,15 @@
 </table>
 
 {% endfor %}
-<form method="get">
-    <input type="date" name="start_date">
-    <input type="date" name="end_date">
-    <button type="submit">Показати</button>
+<form method="get" class="filter-form">
+    <label>
+        З: <input type="date" name="start_date" class="filter-input">
+    </label>
+    <label>
+        До: <input type="date" name="end_date" class="filter-input">
+    </label>
+    <button type="submit" class="filter-button">Показати</button>
 </form>
+ <div style="margin-top: 20px; text-align: center;">
+        <a class="button" href="/" style="padding: 5px 15px; font-weight: bold;">На головну</a>
+    </div>
