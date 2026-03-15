@@ -15,7 +15,8 @@ class StockMovementAdmin(admin.ModelAdmin):
         'created_at',
         'counterparty',
         'total_value',
-        'copy_button'
+        'copy_button',
+        'comment'
     )
 
     change_list_template = "inventory/stockmovement_changelist.html"

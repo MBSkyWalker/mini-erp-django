@@ -129,6 +129,7 @@
 <div class="control"></div>
 <h1>{{ report.date }}</h1>
 <h1>Прибуток {{ report.total_profit }}</h1>
+
 <table>
     {% for sale in report.sales %}
     <tr>
@@ -136,6 +137,11 @@
         <td>{{ sale.quantity }}</td>
         <td>{{ sale.price }}</td>
         <td>{{ sale.profit }}</td>
+        {% if sale.comment %}
+        <td>{{ sale.comment }}</td>
+        {% else %}
+        <td></td>
+        {% endif %}
 
     </tr>
     {% endfor %}

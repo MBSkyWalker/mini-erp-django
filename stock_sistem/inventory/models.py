@@ -63,7 +63,9 @@ class StockMovement(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     # актуальна закупочна 
     purchase_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     
     
